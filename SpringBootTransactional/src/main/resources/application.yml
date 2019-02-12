@@ -1,0 +1,31 @@
+logging:
+  file: ${user.home}/logs/smartCall.log
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: >
+      com.hzb.entity
+
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+      username: root
+      password: 123
+      tomcat.test-on-borrow: false
+      tomcat.test-while-idle: true
+      tomcat.time-between-eviction-runs-millis: 3600000
+      tomcat:
+        initial-size: 5
+        max-active: 50
+        max-wait: 60000
+        min-idle: 5
+  application:
+    name: smartCall
+  profiles:
+    include: actuator
+    
+server:
+  servlet:
+    context-path: / 
+  port: 8080

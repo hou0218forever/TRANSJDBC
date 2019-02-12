@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hzb.entity.Account">
+
+	<resultMap id="AccountMap" type="com.hzb.entity.Account">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="money" column="money" />
+	</resultMap>
+
+	<sql id="table_name">
+		`account`
+	</sql>
+
+	<sql id="columns_all">
+		id,
+		<include refid="columns_exclude_id" />
+	</sql>
+
+	<sql id="columns_exclude_id">
+		`name`, `money`
+	</sql>
+
+	<sql id="values_exclude_id">
+		#{name}, #{money}
+	</sql>
+
+	<insert id="addAccount" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO account
+		(name, money)
+		VALUES (#{name},#{money})
+	</insert>
+
+	<update id="updateAccount" parameterType="Account">
+		update account
+		set
+		money=#{money}
+		where name=#{name}
+	</update>
+
+</mapper>

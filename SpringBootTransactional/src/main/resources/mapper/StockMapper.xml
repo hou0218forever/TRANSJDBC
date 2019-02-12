@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hzb.entity.Stock">
+
+	<resultMap id="AccountMap" type="com.hzb.entity.Stock">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="count" column="count" />
+	</resultMap>
+
+	<sql id="table_name">
+		`stock`
+	</sql>
+
+	<sql id="columns_all">
+		id,
+		<include refid="columns_exclude_id" />
+	</sql>
+
+	<sql id="columns_exclude_id">
+		`name`, `count`
+	</sql>
+
+	<sql id="values_exclude_id">
+		#{name}, #{count}
+	</sql>
+
+	<insert id="addStock" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO stock
+		(name, count)
+		VALUES (#{name},#{count})
+	</insert>
+
+	<update id="updateStock" parameterType="Account">
+		update stock
+		set
+		count=#{count}
+		where name=#{name}
+	</update>
+
+</mapper>
